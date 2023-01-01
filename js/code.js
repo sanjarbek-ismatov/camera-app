@@ -6,6 +6,12 @@ navigator.mediaDevices
     video.srcObject = stream;
     video.play();
   });
+for (let src of JSON.parse(localStorage.images)) {
+  const image = document.createElement("img");
+  image.src = src;
+
+  document.body.appendChild(image);
+}
 function takePhoto() {
   const canvas = document.createElement("canvas");
   const context = canvas.getContext("2d");
@@ -14,14 +20,19 @@ function takePhoto() {
 
   context.drawImage(video, 0, 0);
   const image = document.createElement("img");
-  const base64 = canvas.toDataURL("image/png");
+
+  const base64 = canvas
+    .toDataURL("image/png")
+    .replace("image/png", "image/octet-stream");
+  image.src = base64;
+
   const images = JSON.parse(localStorage.getItem("images"));
   if (!images) {
     localStorage.setItem("images", JSON.stringify([base64]));
   } else {
-    images.push(base64);
+    localStorage.setItem("images", JSON.stringify([...images, base64]));
   }
-  localStorage.setItem("images", JSON.stringify(images));
-  document.body.appendChild(image);
+
+  document.getElementById("images").appendChild(image);
 }
 takePhotoButton.addEventListener("click", takePhoto);
