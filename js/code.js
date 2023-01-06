@@ -6,16 +6,17 @@ navigator.mediaDevices
     video.srcObject = stream;
     video.play();
   });
-if (localStorage.images) {
-  for (let src of JSON.parse(localStorage.images)) {
-    const image = document.createElement("img");
-    image.src = src;
+// if (localStorage.images) {
+//   for (let src of JSON.parse(localStorage.images)) {
+//     const image = document.createElement("img");
+//     image.src = src;
 
-    document.body.appendChild(image);
-  }
-}
+//     document.body.appendChild(image);
+//   }
+// }
 function takePhoto() {
-  document.documentElement.requestFullscreen();
+  video.classList.add("capture");
+  // document.documentElement.requestFullscreen();
   const canvas = document.createElement("canvas");
   const context = canvas.getContext("2d");
   canvas.height = video.videoHeight;
@@ -36,7 +37,17 @@ function takePhoto() {
   } else {
     localStorage.setItem("images", JSON.stringify([base64]));
   }
-  document.getElementById("images").appendChild(image);
+  const animatioImage = image.cloneNode(true);
+  animatioImage.classList.add("position-absolute");
+  animatioImage.classList.add("top-0");
+  animatioImage.classList.add("h-100");
+  animatioImage.classList.add("first-image");
+  animatioImage.style.left = "60px";
+  animatioImage.style.maxHeight = "98vh";
+  image.classList.add("second-image");
+  document.getElementById("button-container").appendChild(image);
+  document.getElementById("video-container").appendChild(animatioImage);
+  setTimeout(() => video.classList.remove("capture"), 2000);
 }
 
 takePhotoButton.addEventListener("click", takePhoto);

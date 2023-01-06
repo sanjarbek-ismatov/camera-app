@@ -8,9 +8,9 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
         integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
-
+    <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous"> -->
+    <link rel="stylesheet" href="/lib/css/bootstrap.min.css">
     <title>Camera App</title>
 </head>
 
@@ -19,20 +19,63 @@
         image {
             width: 90%;
         }
+
+        .capture {
+            transition: all 1s;
+            animation: capture 1s ease alternate;
+
+        }
+
+        @keyframes capture {
+            0% {
+                box-shadow: 0px 0px 5px 5px #fff;
+            }
+
+            100% {
+                box-shadow: 0px 0px 5px 5px transparent;
+            }
+        }
+
+
+        .first-image {
+            transition: all 1s;
+            scale: 0;
+            opacity: 0;
+            animation: captureImage 1s ease;
+        }
+
+        .second-image {
+            position: absolute;
+            width: 70px;
+            height: 70px;
+            bottom: 110px;
+            border-radius: 50%;
+            animation: captureImage;
+        }
+
+        @keyframes captureImage {
+            from {
+                scale: 1;
+                opacity: 1;
+            }
+        }
     </style>
-    <div style="min-height: 100vh;" class="container-fluid px-5 bg-black row">
-        <div class="container col-10 text-center">
-            <video style="max-height: 98vh; height: 100%;" id="video"></video>
-        </div>
-        <div class="col-2 d-flex align-items-center justify-content-center container">
-            <button id="takePhoto" class="btn fs-1 btn-dark "><i class="fa-regular fa-circle-dot"></i></button>
+    <div style="height: 100vh;" class="container-fluid px-5 bg-black d-flex justify-content-center align-items-center">
+        <div style="height: 300px; width: 800px;" class="container row mx-auto">
+            <div id="video-container" class="container col-5 text-center position-relative">
+                <video class="position-absolute top-0" style="max-height: 100%; left: 60px;" id="video"></video>
+            </div>
+            <div id="button-container" class="col-2 d-flex align-items-center justify-content-center container">
+                <button id="takePhoto" class="btn fs-1 btn-dark "><i class="fa-regular fa-circle-dot"></i></button>
+            </div>
         </div>
     </div>
-    <div class="container d-flex flex-column" id="images"></div>
+
 </body>
 <script type="text/javascript" src="/js/code.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+<!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
-    crossorigin="anonymous"></script>
+    crossorigin="anonymous"></script> -->
+<script src="/lib/js/bootstrap.bundle.min.js"></script>
 
 </html>
