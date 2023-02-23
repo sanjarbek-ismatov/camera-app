@@ -16,8 +16,10 @@
 
 <body>
     <style>
-        image {
-            width: 90%;
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
         }
 
         .capture {
@@ -40,17 +42,24 @@
         .first-image {
             transition: all 1s;
             scale: 0;
+            position: absolute;
+            top: 0;
+            left: 0;
             opacity: 0;
             animation: captureImage 1s ease;
         }
 
         .second-image {
-            position: absolute;
             width: 70px;
             height: 70px;
-            bottom: 110px;
             border-radius: 50%;
             animation: captureImage;
+        }
+
+        @media (max-width: 768px) {
+            .second-image {
+                right: 0 !important;
+            }
         }
 
         @keyframes captureImage {
@@ -60,19 +69,26 @@
             }
         }
     </style>
-    <div style="height: 100vh;" class="container-fluid px-5 bg-black d-flex justify-content-center align-items-center">
-        <div style="height: 300px; width: 800px;" class="container row mx-auto">
-            <div id="video-container" class="container col-5 text-center position-relative">
-                <video class="position-absolute top-0" style="max-height: 100%; left: 60px;" id="video"></video>
+    <div style="min-height: 100vh; height: 100%;"
+        class="container-fluid text-center d-flex justify-content-center align-items-center bg-black">
+        <div class="container-fluid row mx-auto">
+            <div id="video-container" class="container-fluid  col-md-10 col-lg-8 text-center position-relative">
+                <video class="" style="width: 100%;" id="video"></video>
             </div>
-            <div id="button-container" class="col-2 d-flex align-items-center justify-content-center container">
-                <button id="takePhoto" class="btn fs-1 btn-dark "><i class="fa-regular fa-circle-dot"></i></button>
+            <div
+                class="col-md-2 d-flex align-items-center position-relative justify-content-between flex-column container">
+                <div style="height: 70px;"></div>
+                <button id="takePhoto" class="btn fs-1 btn-dark my-5 "><i class="fa-regular fa-circle-dot"></i></button>
+                <a href="/gallery">
+                    <div style="height: 70px; width: 70px;" id="image-container" class="position-relative">
+                    </div>
+                </a>
             </div>
         </div>
     </div>
 
 </body>
-<script type="text/javascript" src="../dist/camera.bundle.js"></script>
+<script type="text/javascript" src="./dist/capture.bundle.js"></script>
 <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
     crossorigin="anonymous"></script> -->
